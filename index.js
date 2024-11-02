@@ -14,6 +14,26 @@ btn.addEventListener("click", () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "center",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Sign up successfully"
+                });
+
+
+                setTimeout(() => {
+                    location.href = "login.html"
+                }, 2000)
 
             })
             .catch((error) => {
@@ -60,24 +80,5 @@ btn.addEventListener("click", () => {
 
     }
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "center",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
-    Toast.fire({
-        icon: "success",
-        title: "Sign up successfully"
-    });
 
-
-    setTimeout(() => {
-        location.href = "login.html"
-    }, 2000)
 })

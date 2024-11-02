@@ -1,7 +1,7 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
-  import { getAuth,createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
   const firebaseConfig = {
     apiKey: "AIzaSyAyzr-9TrVLu0F9qHts8PJTiVd-Ig1xAB4",
     authDomain: "authentication-48d26.firebaseapp.com",
@@ -16,4 +16,4 @@
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 
-export {getAuth,createUserWithEmailAndPassword}
+export {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
