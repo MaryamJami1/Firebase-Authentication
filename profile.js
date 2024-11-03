@@ -103,7 +103,6 @@ onAuthStateChanged(auth, (user) => {
                 input: "text",
                 inputPlaceholder: "Enter your Name",
                 inputAttributes: {
-                  maxlength: "10",
                   autocapitalize: "off",
                   autocorrect: "off"
                 }
