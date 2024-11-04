@@ -4,6 +4,7 @@ import { getAuth, createUserWithEmailAndPassword } from "./firebase.js";
 let btn = document.getElementById("register")
 let email = document.getElementById("accountEmail")
 let password = document.getElementById("accountPassword")
+let google = document.getElementById("google")
 
 
 

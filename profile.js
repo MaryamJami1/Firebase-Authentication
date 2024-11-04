@@ -22,7 +22,7 @@ onAuthStateChanged(auth, (user) => {
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"
                  id="image" alt="Generic placeholder image" class=" img-thumbnail mt-4 mb-2"
-                style="width: 150px; z-index: 1; height: 160px">
+                style="width: 150px; z-index: 1; max-height: 160px">
              <button type="button" class="btn btn-success" id="updateProfile" style="z-index: 1;">Update profile</button>
                  </div>
                   <div class="ms-3" style="margin-top: 130px;">
