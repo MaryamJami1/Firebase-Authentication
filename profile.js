@@ -21,8 +21,8 @@ onAuthStateChanged(auth, (user) => {
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"
-                 id="image" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                style="width: 150px; z-index: 1">
+                 id="image" alt="Generic placeholder image" class=" img-thumbnail mt-4 mb-2"
+                style="width: 150px; z-index: 1; height: 160px">
              <button type="button" class="btn btn-success" id="updateProfile" style="z-index: 1;">Update profile</button>
                  </div>
                   <div class="ms-3" style="margin-top: 130px;">
@@ -145,8 +145,8 @@ onAuthStateChanged(auth, (user) => {
         .then(() => {
           let name1 = document.getElementById("name1")
           let image = document.getElementById("image")
-            image.src=url
-            console.log(image);
+          image.src = url
+          console.log(image);
           let professionName = document.getElementById("profession")
           let cityName = document.getElementById("city")
           name1.innerHTML = name
