@@ -8,25 +8,25 @@ let profilePage = document.getElementById("profilePage");
 
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        const uid = user.uid;
-        console.log(user);
+  if (user) {
+    const uid = user.uid;
+    console.log(user);
 
-        profilePage.innerHTML =
-            `<section class="h-100 gradient-custom-2">
+    profilePage.innerHTML =
+      `<section class="h-100 gradient-custom-2">
              <div class="container py-5 h-100">
                       <div class="row d-flex justify-content-center">
              <div class="col col-lg-9 col-xl-8">
                <div class="card">
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-              <img src=${user.photoURL}
-                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLU5_eUUGBfxfxRd4IquPiEwLbt4E_6RYMw&s"
+                 id="image" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                 style="width: 150px; z-index: 1">
              <button type="button" class="btn btn-success" id="updateProfile" style="z-index: 1;">Update profile</button>
                  </div>
                   <div class="ms-3" style="margin-top: 130px;">
-              <h5>${user.displayName}</h5>
+              <h5 id="name1">Name<h5>
               <p> ${user.emailVerified ? "Verified" : "Not Verified"}</p>
                 </div>
               </div>
@@ -50,8 +50,8 @@ onAuthStateChanged(auth, (user) => {
             <div class="mb-5  text-body">
               <p class="lead fw-normal mb-1">About</p>
               <div class="p-4 bg-body-tertiary">
-                <p class="font-italic mb-1">Web Developer</p>
-                <p class="font-italic mb-1">Lives in New York</p>
+                <p class="font-italic mb-1" id="profession">Profession</p>
+                <p class="font-italic mb-1" id="city">City</p>
                 <p class="font-italic mb-0">${user.email}</p>
           
               </div>
@@ -91,77 +91,109 @@ onAuthStateChanged(auth, (user) => {
         </section>`
 
 
-//////////// update profile
+    //////////// update profile
 
-        let update = document.getElementById("updateProfile");
-        console.log(update);
+    let update = document.getElementById("updateProfile");
+    console.log(update);
 
-        update.addEventListener("click", async() => {
+    update.addEventListener("click", async () => {
 
-            const { value: name } = await Swal.fire({
-                title: "Enter your Name",
-                input: "text",
-                inputPlaceholder: "Enter your Name",
-                inputAttributes: {
-                  autocapitalize: "off",
-                  autocorrect: "off"
-                }
-              });
-    
+      const { value: name } = await Swal.fire({
+        title: "Enter your Name",
+        input: "text",
+        inputPlaceholder: "Enter your Name",
+        inputAttributes: {
+          autocapitalize: "off",
+          autocorrect: "off"
+        }
+      });
 
 
-            const { value: url } = await Swal.fire({
-                title: "Enter your URL",
-                input: "url",
-                inputPlaceholder: "Enter the URL"
-              });
 
-            updateProfile(auth.currentUser, {
+      const { value: url } = await Swal.fire({
+        title: "Enter your URL",
+        input: "url",
+        inputPlaceholder: "Enter the URL"
+      });
 
-                displayName: name,
-                photoURL: url,
-            })
-                .then(() => {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Profile Update",
-                        text: "refresh your page"
-                    });
-                })
-                .catch((error) => {
-                    switch (error) {
-                        case "FirebaseError: Firebase: Photo URL too long. (auth/invalid-profile-attribute).":
-                            Swal.fire({
-                                icon: "error",
-                                title: "URl too Long",
-                                text: "Please enter another url."
-                            });
-                            break;
-                    }
-                    console.log(error);
-                });
+      const { value: profession } = await Swal.fire({
+        title: "Enter your profession",
+        input: "text",
+        inputPlaceholder: "Enter your profession",
+        inputAttributes: {
+          autocapitalize: "off",
+          autocorrect: "off"
+        }
+      });
+
+
+      const { value: city } = await Swal.fire({
+        title: "Enter your city",
+        input: "text",
+        inputPlaceholder: "Enter your city",
+        inputAttributes: {
+          autocapitalize: "off",
+          autocorrect: "off"
+        }
+      });
+
+      updateProfile(auth.currentUser, {
+
+        displayName: name,
+        photoURL: url,
+      })
+        .then(() => {
+          let name1 = document.getElementById("name1")
+          let image = document.getElementById("image")
+            image.src=url
+            console.log(image);
+          let professionName = document.getElementById("profession")
+          let cityName = document.getElementById("city")
+          name1.innerHTML = name
+          professionName.innerHTML = profession
+          cityName.innerHTML = city
+
+
+
+          Swal.fire({
+            icon: "success",
+            title: "Profile Update",
+          });
         })
-
-
-
-
-
-//////////// go to dashboard
-        let dashboard = document.getElementById("dashboard")
-        dashboard.addEventListener("click", () => {
-
-            location.href = "dashboard.html"
-            })
-
-
-    }
-    else {
-        Swal.fire({
-            icon: "error",
-            text: "User is logout."
+        .catch((error) => {
+          switch (error) {
+            case "FirebaseError: Firebase: Photo URL too long. (auth/invalid-profile-attribute).":
+              Swal.fire({
+                icon: "error",
+                title: "URl too Long",
+                text: "Please enter another url."
+              });
+              break;
+          }
+          console.log(error);
         });
+    })
 
-    }
+
+
+
+
+    //////////// go to dashboard
+    let dashboard = document.getElementById("dashboard")
+    dashboard.addEventListener("click", () => {
+
+      location.href = "dashboard.html"
+    })
+
+
+  }
+  else {
+    Swal.fire({
+      icon: "error",
+      text: "User is logout."
+    });
+
+  }
 });
 
 
