@@ -1,16 +1,19 @@
 
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "./firebase.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider,db,collection,addDoc } from "./firebase.js";
 
 let btn = document.getElementById("register")
 let email = document.getElementById("accountEmail")
 let password = document.getElementById("accountPassword")
 let google = document.getElementById("google")
-
-
+let name = document.getElementById("userName")
+let rollNum = document.getElementById("rollNum")
+let phoneNum = document.getElementById("phoneNum")
 
 const auth = getAuth();
-btn.addEventListener("click", () => {
+btn.addEventListener("click", async() => {
     if (email.value.trim() && password.value.trim()) {
+
+     
         createUserWithEmailAndPassword(auth, email.value, password.value)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -68,7 +71,21 @@ btn.addEventListener("click", () => {
                 console.log(errorMessage);
 
 
-            })
+            });
+            try {
+                const docRef = await addDoc(collection(db, "users"), {
+                  name: name.value,
+                  rollNum: rollNum.value,
+                  phoneNum:phoneNum.value,
+                });
+    
+                
+                console.log("Document written with ID: ", docRef.id);
+              } catch (e) {
+                console.error("Error adding document: ", e);
+              }
+    
+              
 
     }
 
@@ -80,6 +97,8 @@ btn.addEventListener("click", () => {
         });
 
     }
+
+
 
 
 })
