@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword } from "./firebase.js";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "./firebase.js";
 
 let btn = document.getElementById("login")
 let email = document.getElementById("loginEmail");
@@ -57,4 +57,25 @@ btn.addEventListener("click", () => {
     }
 
 
+})
+
+
+const provider = new GoogleAuthProvider();
+google.addEventListener("click", () => {
+
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user;
+            console.log(user);
+            
+          
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+        });
 })

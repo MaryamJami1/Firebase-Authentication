@@ -18,4 +18,4 @@
   const analytics = getAnalytics(app);
   const db = getFirestore(app);
 
-export {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, signOut, onAuthStateChanged, updateProfile, signInWithPopup, GoogleAuthProvider, db,collection,addDoc }
+export {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, signOut, onAuthStateChanged, updateProfile, signInWithPopup, GoogleAuthProvider, collection, addDoc, db}

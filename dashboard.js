@@ -1,4 +1,4 @@
-import {getAuth, sendEmailVerification, signOut, onAuthStateChanged } from "./firebase.js";
+import {getAuth, sendEmailVerification, signOut } from "./firebase.js";
 
 
 // verify with email
