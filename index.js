@@ -1,5 +1,5 @@
 
-import { getAuth, createUserWithEmailAndPassword,collection, addDoc, db } from "./firebase.js";
+import { getAuth, createUserWithEmailAndPassword, doc, setDoc, db, getDoc } from "./firebase.js";
 
 let btn = document.getElementById("register")
 let email = document.getElementById("accountEmail")
@@ -11,10 +11,6 @@ let phoneNum = document.getElementById("phoneNum")
 const auth = getAuth();
 btn.addEventListener("click", async () => {
     if (email.value.trim() && password.value.trim()) {
-
-      
-
-
         createUserWithEmailAndPassword(auth, email.value, password.value)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -23,7 +19,7 @@ btn.addEventListener("click", async () => {
                     toast: true,
                     position: "center",
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 1000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.onmouseenter = Swal.stopTimer;
@@ -36,9 +32,59 @@ btn.addEventListener("click", async () => {
                 });
 
 
-                setTimeout(() => {
+                setTimeout(async () => {
+
+                    try {
+                        const user = auth.currentUser;
+                        if (user) {
+                            const uid = user.uid;
+                            console.log(uid);
+                            await setDoc(doc(db, "usersWithId", uid), {
+                                name: name.value,
+                                address: Address.value,
+                                phoneNo: phoneNum.value
+                            });
+
+                            console.log("Document written with ID: ", uid);
+
+                            const docRef = doc(db, "usersWithId", uid);
+                            const docSnap = await getDoc(docRef);
+
+                            if (docSnap.exists()) {
+                                console.log("Document data:", docSnap.data());
+                            } else {
+                                console.log("No such document!");
+                            }
+
+
+                        } else {
+                            console.log("no user login");
+                        }
+
+
+                        //////////////////set doc with static id
+
+                        // await setDoc(doc(db, "userId", "098647"), {
+                        //     name: name.value,
+                        //     address: Address.value,
+                        //     phoneNo:phoneNum.value
+                        //   });
+                        //   console.log("Document written with ID: ");
+
+
+
+                        ///////////////////   get doc
+
+                        // const docRef = await addDoc(collection(db, "users"), {
+                        //   name: name.value,
+                        //   address: Address.value,
+                        //   phoneNo:phoneNum.value
+                        // });
+                    } catch (e) {
+                        console.error("Error adding document: ", e);
+                    }
                     location.href = "login.html"
-                }, 2000)
+                }, 1000)
 
             })
             .catch((error) => {
@@ -74,21 +120,7 @@ btn.addEventListener("click", async () => {
 
             });
 
-            try {
-                const docRef = await addDoc(collection(db, "users"), {
-                  name: name.value,
-                  address: Address.value,
-                  phoneNo:phoneNum.value
-                });
-                console.log("Document written with ID: ", docRef.id);
-              } catch (e) {
-                console.error("Error adding document: ", e);
-              }
-
-
-    }
-
-    else {
+    } else {
         Swal.fire({
             icon: "error",
             title: "Fill out the fields",
@@ -96,9 +128,6 @@ btn.addEventListener("click", async () => {
         });
 
     }
-  
-   
-
 
 
 
