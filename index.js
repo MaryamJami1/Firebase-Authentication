@@ -1,5 +1,5 @@
 
-import { getAuth, createUserWithEmailAndPassword, doc, setDoc, db, getDoc } from "./firebase.js";
+import { getAuth, createUserWithEmailAndPassword, doc, setDoc, db, getDoc, updateDoc, serverTimestamp } from "./firebase.js";
 
 let btn = document.getElementById("register")
 let email = document.getElementById("accountEmail")
@@ -37,30 +37,41 @@ btn.addEventListener("click", async () => {
                     try {
                         const user = auth.currentUser;
                         if (user) {
+                            /////get uid
                             const uid = user.uid;
                             console.log(uid);
+
+                            //////add user in database with id
                             await setDoc(doc(db, "usersWithId", uid), {
                                 name: name.value,
                                 address: Address.value,
                                 phoneNo: phoneNum.value
                             });
+                             console.log("Document written with ID: ", uid);
 
-                            console.log("Document written with ID: ", uid);
-
+                             
                             const docRef = doc(db, "usersWithId", uid);
                             const docSnap = await getDoc(docRef);
 
+                            //////////////////update data with time
+                            const updateTimestamp = await updateDoc(docRef, {
+                                timestamp: serverTimestamp()
+                            });
+
+                       //////////read user data
                             if (docSnap.exists()) {
                                 console.log("Document data:", docSnap.data());
                             } else {
                                 console.log("No such document!");
-                            }
+                            }                           
 
 
                         } else {
                             console.log("no user login");
                         }
 
+
+                       
 
                         //////////////////set doc with static id
 
@@ -83,7 +94,7 @@ btn.addEventListener("click", async () => {
                     } catch (e) {
                         console.error("Error adding document: ", e);
                     }
-                    location.href = "login.html"
+                    // location.href = "login.html"
                 }, 1000)
 
             })
