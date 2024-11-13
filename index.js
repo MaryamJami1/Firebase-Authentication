@@ -94,7 +94,7 @@ btn.addEventListener("click", async () => {
                     } catch (e) {
                         console.error("Error adding document: ", e);
                     }
-                    // location.href = "login.html"
+                    location.href = "login.html"
                 }, 1000)
 
             })
