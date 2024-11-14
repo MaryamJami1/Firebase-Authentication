@@ -23,7 +23,7 @@ postBtn.addEventListener("click", async () => {
 
 
 
-        //////////read user data and get time
+        ///////read user data and get time
 
         const docRef = doc(db, "post", uid);
         const docSnap = await getDoc(docRef);
