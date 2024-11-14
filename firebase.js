@@ -1,7 +1,7 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
-  import { getFirestore,/*collection, addDoc*/ doc, setDoc, getDoc,updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+  import { getFirestore,collection, addDoc, doc, setDoc, getDoc,updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, signOut, onAuthStateChanged, updateProfile, signInWithPopup, GoogleAuthProvider} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
   const firebaseConfig = {
     apiKey: "AIzaSyAyzr-9TrVLu0F9qHts8PJTiVd-Ig1xAB4",
@@ -18,4 +18,4 @@
   const analytics = getAnalytics(app);
   const db = getFirestore(app);
 
-export {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, signOut, onAuthStateChanged, updateProfile, signInWithPopup, GoogleAuthProvider, /*collection, addDoc*/ doc, setDoc, db, getDoc,updateDoc, serverTimestamp}
+export {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, signOut, onAuthStateChanged, updateProfile, signInWithPopup, GoogleAuthProvider, collection, addDoc, doc, setDoc, db, getDoc,updateDoc, serverTimestamp}
