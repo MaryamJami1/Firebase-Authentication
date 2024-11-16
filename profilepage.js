@@ -1,8 +1,8 @@
-import { doc, getAuth, setDoc, getDoc, db, serverTimestamp, addDoc, collection } from "./firebase.js";
-let postBtn = document.getElementById("postBtn")
-let postText = document.getElementById("postText")
-let postDiv = document.getElementById("postDiv")
-let timeShow = document.getElementById("time")
+import { doc, getAuth, setDoc, getDocs, db, serverTimestamp, addDoc, collection, query, where, onSnapshot,updateDoc } from "./firebase.js";
+let postBtn = document.getElementById("postBtn");
+let postText = document.getElementById("postText");
+let getPost = document.getElementById("getPost");
+let getDiv = document.getElementById("getDiv");
 
 
 const auth = getAuth();
@@ -24,40 +24,6 @@ postBtn.addEventListener("click", async () => {
         } catch (e) {
             console.error("Error adding document: ", e);
         }
-
-        //////add user in database with id
-        // await setDoc(doc(db, "post", uid), {
-        //     post: postText.value,
-        //     timestamp: serverTimestamp()
-        // });
-        // console.log("Document written with ID: ", uid);
-        postDiv.innerHTML = postText.value
-        postText.value = " "
-
-
-        ///////read user data and get time
-
-//         const docRef = doc(db, "posts", uid);
-//         const docSnap = await getDoc(docRef);
-        
-
-//         try{
-//             if (docSnap.exists()) {
-//                 let hour = docSnap.data().timestamp.toDate().getHours().toString()
-//                 let minute = docSnap.data().timestamp.toDate().getMinutes().toString()
-//                 timeShow.innerHTML = `Time ${hour}:${minute}`;
-//             }
-//             else{
-//                 console.log("no document");
-                
-//             }
-//         }
-//       catch(e){
-// console.log(e);
-
-//       }
-
-
     } else {
         console.log("no user");
 
@@ -66,3 +32,44 @@ postBtn.addEventListener("click", async () => {
 
 })
 
+////////////////// get post by id
+getPost.addEventListener("click", async () => {
+    const q = query(collection(db, "posts"), where("id", "==", "stZykA7b0KX7wS37ELWZtcjqZF13"));
+
+    try {
+        const querySnapshot = await getDocs(q);
+        getDiv.innerHTML =" ";
+        querySnapshot.forEach((doc) => {
+         
+            getDiv.innerHTML += `<div>${doc.data().post}</div> </br> </br>`
+        });
+    } catch (e) {
+        console.log(e);
+
+    }
+
+
+})
+
+
+
+///////////////// queries for posts
+const usersRef = collection(db, "posts");
+
+const q = query(usersRef, where("id", "==", "stZykA7b0KX7wS37ELWZtcjqZF13"))
+const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    console.log("calling");
+    const user = auth.currentUser;
+    const uid = user.uid;
+    const washingtonRef = doc(db, "posts", uid);
+
+    querySnapshot.forEach(async (doc) => {
+
+        const querySnapshot = await getDocs(q);
+        getDiv.innerHTML +=`<div>${postText.value}</div>`;
+        postText.value=" "
+    
+       
+
+    });
+});
