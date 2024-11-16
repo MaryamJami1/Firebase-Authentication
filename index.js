@@ -58,7 +58,7 @@ btn.addEventListener("click", async () => {
                                 timestamp: serverTimestamp()
                             });
 
-                       //////////read user data
+                       //////////read user
                             if (docSnap.exists()) {
                                 console.log("Document data:", docSnap.data());
                             } else {
