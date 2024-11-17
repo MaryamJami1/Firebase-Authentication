@@ -127,9 +127,9 @@ const unsubscribe = onSnapshot(q, async (querySnapshot) => {
     querySnapshot.forEach(async (doc) => {
 
         const querySnapshot = await getDocs(q);
-        getDiv.innerHTML += `<div>${postText.value}</div>`;
+        getDiv.innerHTML += `<p>${postText.value}</p>`;
         postText.value = " "
     });
 
-
 });
+
