@@ -100,7 +100,6 @@ getPost.addEventListener("click", async () => {
         const querySnapshot = await getDocs(q);
         getDiv.innerHTML = " ";
         querySnapshot.forEach((doc) => {
-
             getDiv.innerHTML += `<div>${doc.data().post}</div> </br></br> `
 
         });
@@ -115,7 +114,6 @@ getPost.addEventListener("click", async () => {
 
 
 
-
 ///////////////// queries for get all posts
 const usersRef = collection(db, "posts");
 
@@ -125,7 +123,6 @@ const unsubscribe = onSnapshot(q, async (querySnapshot) => {
 
     /////// post
     querySnapshot.forEach(async (doc) => {
-
         const querySnapshot = await getDocs(q);
         getDiv.innerHTML += `<p>${postText.value}</p>`;
         postText.value = " "
