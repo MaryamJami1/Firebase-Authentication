@@ -80,8 +80,9 @@ postBtn.addEventListener("click", async () => {
         console.log("no user");
 
     }
-
-
+          getDiv.innerHTML = `<p>${postText.value}</p>`;
+         postText.value = " "
+  
 });
 
 
@@ -100,7 +101,9 @@ getPost.addEventListener("click", async () => {
         const querySnapshot = await getDocs(q);
         getDiv.innerHTML = " ";
         querySnapshot.forEach((doc) => {
-            getDiv.innerHTML += `<div>${doc.data().post}</div> </br></br> `
+         getDiv.innerHTML += `<div>${doc.data().post}</div> </br></br>`
+    
+         
 
         });
     } catch (e) {
@@ -114,19 +117,18 @@ getPost.addEventListener("click", async () => {
 
 
 
-///////////////// queries for get all posts
-const usersRef = collection(db, "posts");
+/////////////// queries for get all posts
+// const usersRef = collection(db, "posts");
 
-const q = query(usersRef)
-const unsubscribe = onSnapshot(q, async (querySnapshot) => {
-    console.log("calling");
+// const q = query(usersRef)
+// const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+//     console.log("calling");
 
-    /////// post
-    querySnapshot.forEach(async (doc) => {
-        const querySnapshot = await getDocs(q);
-        getDiv.innerHTML += `<p>${postText.value}</p>`;
-        postText.value = " "
-    });
+//     /////// post
+//     querySnapshot.forEach(async (doc) => {
+//         getDiv.innerHTML += `<p>${postText.value}</p>`;
+//         postText.value = " "
+//     });
 
-});
+// });
 
