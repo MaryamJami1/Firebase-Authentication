@@ -1,4 +1,4 @@
-import { doc, getAuth, getDoc, getDocs, db, serverTimestamp, addDoc, collection, query, where, onSnapshot, updateDoc } from "./firebase.js";
+import { doc, getAuth, getDoc, getDocs, db, serverTimestamp, addDoc, collection, query, where, onSnapshot, updateDoc,orderBy } from "./firebase.js";
 let postBtn = document.getElementById("postBtn");
 let postText = document.getElementById("postText");
 let getPost = document.getElementById("getPost");
@@ -15,9 +15,9 @@ let useremail = document.getElementById("email")
 const userRef = collection(db, "userWithId");
 const u = query(userRef);
 
-const unsub = onSnapshot(u, async() => {
+const unsub = onSnapshot(u, async () => {
     console.log("calling")
-    
+
     ////////read user data
     const user = auth.currentUser;
     console.log(user);
@@ -80,11 +80,10 @@ postBtn.addEventListener("click", async () => {
         console.log("no user");
 
     }
-          getDiv.innerHTML = `<p>${postText.value}</p>`;
-         postText.value = " "
-  
-});
+    getDiv.innerHTML = `<p>${postText.value}</p>`;
+    postText.value = " "
 
+});
 
 
 
@@ -95,27 +94,25 @@ getPost.addEventListener("click", async () => {
     console.log(user);
     const uid = user.uid;
     console.log(uid);
+
     const q = query(collection(db, "posts"), where("id", "==", uid));
 
     try {
         const querySnapshot = await getDocs(q);
         getDiv.innerHTML = " ";
-        querySnapshot.forEach((doc) => {
-         getDiv.innerHTML += `<div>${doc.data().post}</div> </br></br>`
-    
-         
+        for (const doc of querySnapshot.docs) {
+            const data = doc.data();
+            getDiv.innerHTML += `<div>${data.post}</div></br></br>`;
 
-        });
+        }
+
     } catch (e) {
         console.log(e);
-
     }
 
 
+
 });
-
-
-
 
 /////////////// queries for get all posts
 // const usersRef = collection(db, "posts");
