@@ -1,4 +1,4 @@
-import { doc, getAuth, getDoc, getDocs, db, serverTimestamp, addDoc, collection, query, where, onSnapshot, updateDoc,orderBy } from "./firebase.js";
+import { doc, getAuth, getDoc, getDocs, db, serverTimestamp, addDoc, collection, query, where, onSnapshot, updateDoc, orderBy } from "./firebase.js";
 let postBtn = document.getElementById("postBtn");
 let postText = document.getElementById("postText");
 let getPost = document.getElementById("getPost");
@@ -129,3 +129,54 @@ getPost.addEventListener("click", async () => {
 
 // });
 
+
+let cloudName = "dk1awivy2"
+let unsignedUploadPreset = "t5mrntvv"
+let pic = document.getElementById("uploadButton")
+let fileInput = document.getElementById("fileInput")
+let profileDiv = document.getElementById("profileDiv")
+
+
+
+pic.addEventListener("click", () => {
+    fileInput.click()
+    profileDiv.innerHTML=" "
+
+})
+
+fileInput.addEventListener("change", async () => {
+    let file = fileInput.files[0]
+    
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", unsignedUploadPreset);
+
+    try {
+        const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload/`, {
+            method: "POST",
+            body: formData,
+        });
+    
+        const data = await response.json();
+        let src = data.secure_url;
+        console.log("Uploaded file URL:", src);
+    
+        // Transform the URL
+        let transformedUrl = src.replace(
+            "upload/",
+            "upload/h_200,w_150/r_max/"
+        );
+    
+        console.log("Transformed URL:", transformedUrl);
+    
+        // Create and append the image
+        let img = new Image();
+        img.src = transformedUrl;
+        profileDiv.appendChild(img);
+    } catch (error) {
+        console.error("Error during upload or transformation:", error);
+    }
+    
+}
+)

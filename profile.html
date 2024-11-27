@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-   
+
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css'>
     <link rel="stylesheet" href="profile.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -19,76 +19,41 @@
         <div class="container">
             <div class="card overflow-hidden">
                 <div class="card-body p-0">
-                    <img src="https://i.pinimg.com/550x/5a/61/8b/5a618b30dff5299509a3b94675ff547e.jpg" alt="" class="img-fluid">
+                    <img src="https://i.pinimg.com/550x/5a/61/8b/5a618b30dff5299509a3b94675ff547e.jpg" alt=""
+                        class="img-fluid">
                     <div class="row align-items-center">
-                        <div class="col-lg-4 order-lg-1 order-2">
-                            <div class="d-flex align-items-center justify-content-around m-4">
-                                <div class="text-center">
-                                    <i class="fa fa-file fs-6 d-block mb-2"></i>
-                                    <h4 class="mb-0 fw-semibold lh-1">938</h4>
-                                    <p class="mb-0 fs-4">Posts</p>
-                                </div>
-                                <div class="text-center">
-                                    <i class="fa fa-user fs-6 d-block mb-2"></i>
-                                    <h4 class="mb-0 fw-semibold lh-1">3,586</h4>
-                                    <p class="mb-0 fs-4">Followers</p>
-                                </div>
-                                <div class="text-center">
-                                    <i class="fa fa-check fs-6 d-block mb-2"></i>
-                                    <h4 class="mb-0 fw-semibold lh-1">2,659</h4>
-                                    <p class="mb-0 fs-4">Following</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mt-n3 order-lg-2 order-1">
+                      
+                        <div>
                             <div class="mt-n5">
                                 <div class="d-flex align-items-center justify-content-center mb-2">
                                     <div class="linear-gradient d-flex align-items-center justify-content-center rounded-circle"
                                         style="width: 110px; height: 110px;" ;="">
                                         <div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden"
-                                            style="width: 100px; height: 100px;" ;="">
-                                            <img src="https://i.etsystatic.com/45049352/r/il/d1eb4f/6027001697/il_300x300.6027001697_8iyk.jpg" alt=""
-                                                class="w-100 h-100">
+                                            style="width: 100px; height: 100px;" ;="" id="profileDiv">
+                                          
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <h5 class="fs-5 mb-0 fw-semibold" id="name"></h5>
-                                
+                                    <h5 class="fs-8 mb-0 fw-semibold" id="name"></h5>
+
                                 </div>
                             </div>
                         </div>
-    
-                    </div>
-                    <ul class="nav nav-pills user-profile-tab justify-content-end mt-2 bg-light-info rounded-2"
-                        id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button
-                                class="nav-link position-relative rounded-0 active d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
-                                id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                                type="button" role="tab" aria-controls="pills-profile" aria-selected="true">
-                                <i class="fa fa-user me-2 fs-6"></i>
-                                <span class="d-none d-md-block">Profile</span>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button
-                                class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
-                                id="pills-followers-tab">
-                                <i class="fa fa-heart me-2 fs-6"></i>
-                                <span class="d-none d-md-block">Followers</span>
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button
-                                class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
-                                id="pills-friends-tab">
-                                <i class="fa fa-users me-2 fs-6"></i>
-                                <span class="d-none d-md-block">Friends</span>
-                            </button>
-                        </li>
 
+                    </div>
+                   
+
+                    <ul class="nav nav-pills  justify-content-center bg-light-info rounded-2 mt-4 mb-3">
+                        <li>
+                            <button class="nav-link" id="uploadButton">
+                               <i class="fa fa-users me-2 fs-8"></i> upload photo
+                               <input type="file" id="fileInput" style="display: none;">
+                            </button>
+                        </li>
                     </ul>
+
+
                 </div>
             </div>
             <div class="tab-content" id="pills-tabContent">
@@ -102,7 +67,7 @@
                                     <p>Hello, I love making websites and graphics. Lorem ipsum
                                         dolor sit amet, consectetur adipiscing elit.</p>
                                     <ul class="list-unstyled mb-0">
-                                      
+
                                         <li class="d-flex align-items-center gap-3 mb-4">
                                             <i class="fa fa-envelope text-dark fs-6"></i>
                                             <h6 class="fs-4 fw-semibold mb-0" id="email"></h6>
@@ -119,16 +84,16 @@
                                 </div>
                             </div>
 
-                           
-                          
+
+
                         </div>
                         <div class="col-lg-8">
 
                             <div class="card shadow-none border">
                                 <div class="card-body">
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" placeholder="Leave a comment here"
-                                            id="postText" style="height: 137px"></textarea>
+                                        <textarea class="form-control" placeholder="Leave a comment here" id="postText"
+                                            style="height: 137px"></textarea>
                                         <label for="floatingTextarea2" class="p-7">Share your thoughts</label>
                                     </div>
                                     <div class="d-flex align-items-center gap-2">
@@ -139,20 +104,20 @@
                             </div>
                             <div class="card shadow-none border">
                                 <div class="card-body">
-                                  
+
                                     <div class="d-flex p-3">
                                         <h4 class="fw-semibold mb-3">Posts</h4>
 
                                         <button class="btn btn-primary ms-auto" id="getPost">Get all posts</button>
                                     </div>
                                     <div id="getDiv">
-                                      
-                                       
-                                        
+
+
+
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -179,5 +144,3 @@ crossorigin="anonymous"></script> -->
 </body>
 
 </html>
-
-
