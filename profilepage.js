@@ -1,4 +1,4 @@
-import { doc, getAuth, getDoc, getDocs, db, serverTimestamp, addDoc, collection, query, where, onSnapshot, updateDoc, orderBy } from "./firebase.js";
+import { doc, getAuth, getDoc, getDocs, db, serverTimestamp, addDoc, collection, query, where, onSnapshot } from "./firebase.js";
 let postBtn = document.getElementById("postBtn");
 let postText = document.getElementById("postText");
 let getPost = document.getElementById("getPost");
@@ -11,14 +11,12 @@ let useremail = document.getElementById("email")
 
 
 
-/////////////// get user info quesries
 const userRef = collection(db, "userWithId");
 const u = query(userRef);
 
 const unsub = onSnapshot(u, async () => {
     console.log("calling")
 
-    ////////read user data
     const user = auth.currentUser;
     console.log(user);
     const uid = user.uid;
@@ -58,11 +56,9 @@ postBtn.addEventListener("click", async () => {
     console.log(user);
 
     if (user) {
-        ///// Get UID
         const uid = user.uid;
         console.log(uid);
 
-        // Get the post text and selected category
         const postContent = postText.value.trim();
         const selectedCategory = document.getElementById("categorySelect").value;
 
@@ -82,7 +78,6 @@ postBtn.addEventListener("click", async () => {
             return;
         }
 
-        ////// Add data with random ID
         try {
             const docRef = await addDoc(collection(db, "posts"), {
                 post: postContent,
@@ -98,7 +93,6 @@ postBtn.addEventListener("click", async () => {
         console.log("No user logged in");
     }
 
-    // Update the UI
     getDiv.innerHTML = `<p>${postText.value}</p>`;
     postText.value = "";
 });
@@ -107,7 +101,6 @@ postBtn.addEventListener("click", async () => {
 
 
 
-////////////////// get post by id
 getPost.addEventListener("click", async () => {
     const user = auth.currentUser;
     console.log(user);

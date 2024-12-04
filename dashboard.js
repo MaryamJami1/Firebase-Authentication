@@ -52,7 +52,7 @@ const usersRef = collection(db, "posts");
 
 const qAll = query(usersRef);
 const unsubscribeAll = onSnapshot(qAll, (querySnapshot) => {
-    trendingPost.innerHTML = ""; 
+    trendingPost.innerHTML = "";
     if (querySnapshot.empty) {
         trendingPost.innerHTML = "<p>No posts available.</p>";
     } else {
@@ -96,7 +96,7 @@ searchBtn.addEventListener("click", () => {
         trendingPost.innerHTML = "<p>Loading...</p>";
         const qCategory = query(usersRef, where("category", "==", selectedCategory));
         const unsubscribeCategory = onSnapshot(qCategory, (querySnapshot) => {
-            trendingPost.innerHTML = ""; 
+            trendingPost.innerHTML = "";
             if (querySnapshot.empty) {
                 trendingPost.innerHTML = "<p>No posts found in this category.</p>";
             } else {
