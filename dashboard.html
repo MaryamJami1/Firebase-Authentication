@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern User Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
+
 <body>
+    
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -14,48 +19,46 @@
         <nav>
             <a href="#" class="active">Home</a>
             <a href="./profile.html">Profile</a>
-            <a href="#">Notifications</a>
-            <a href="#">Messages</a>
+            
             <a class="logout" id="btn-EmailVerify">Verify With Email</a>
             <a class="logout" id="btn-logout">Logout</a>
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                  <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+                  </form>
+                </div>
+              </nav>
         </nav>
-       
+
     </div>
+  
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Navbar -->
-        <header class="navbar">
-            <h1>Welcome 👋</h1>
-            
-        </header>
+        <h1>Trending Post</h1>
+        <div id="trendingPost">
+
+        </div>
+
 
         <!-- Dashboard Content -->
         <section class="dashboard-content">
-            <div class="dashboard-card">
-                <h2>Overview</h2>
-                <p>Get a quick overview of your account activity and recent updates.</p>
-            </div>
+            <div>
 
-            <div class="dashboard-card">
-                <h2>Recent Activity</h2>
-                <p>Check your recent logins, messages, and notifications here.</p>
-            </div>
+                <p id="allPost"></p>
 
-            <div class="dashboard-card">
-                <h2>Messages</h2>
-                <p>View all your unread messages and latest conversations.</p>
-            </div>
-
-            <div class="dashboard-card">
-                <h2>Reports</h2>
-                <p>Generate and view reports based on your activities and data.</p>
             </div>
         </section>
     </div>
+
+
+    
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js'></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="dashboard.js"></script>
 
 </body>
+
 </html>

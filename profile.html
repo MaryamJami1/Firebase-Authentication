@@ -19,8 +19,15 @@
         <div class="container">
             <div class="card overflow-hidden">
                 <div class="card-body p-0">
-                    <img src="https://i.pinimg.com/550x/5a/61/8b/5a618b30dff5299509a3b94675ff547e.jpg" alt=""
-                        class="img-fluid">
+                    <!-- <img src="https://i.pinimg.com/550x/5a/61/8b/5a618b30dff5299509a3b94675ff547e.jpg" alt=""
+                        class="img-fluid"> -->
+                        <div id="coverDiv">
+                            <button  id="coverBtn">
+                                <i class="fa fa-users me-2 fs-8"></i> upload photo
+                                <input type="file" id="coverInput" style="display: none;">
+                             </button>
+
+                        </div>
                     <div class="row align-items-center">
                       
                         <div>
@@ -92,6 +99,7 @@
                             <div class="card shadow-none border">
                                 <div class="card-body">
                                     <div class="form-floating mb-3">
+                                        
                                         <textarea class="form-control" placeholder="Leave a comment here" id="postText"
                                             style="height: 137px"></textarea>
                                         <label for="floatingTextarea2" class="p-7">Share your thoughts</label>
@@ -111,6 +119,7 @@
                                         <button class="btn btn-primary ms-auto" id="getPost">Get all posts</button>
                                     </div>
                                     <div id="getDiv">
+                                     
 
 
 

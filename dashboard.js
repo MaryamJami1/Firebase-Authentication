@@ -1,4 +1,5 @@
-import {getAuth, sendEmailVerification, signOut } from "./firebase.js";
+import {getAuth, sendEmailVerification, signOut, collection, db, onSnapshot, query } from "./firebase.js";
+
 
 
 // verify with email
@@ -55,6 +56,32 @@ logOut.addEventListener("click", ()=>{
         
       });
 })
+
+
+
+
+
+
+///////////// queries for get all posts
+let trendingPost =document.getElementById("trendingPost")
+
+const usersRef = collection(db, "posts");
+
+const q = query(usersRef)
+const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+    console.log("calling");
+
+    /////// post
+    querySnapshot.forEach(async (doc) => {
+       console.log(doc.data());
+    
+       trendingPost.innerHTML += `${doc.data().post} </br></br>`
+       
+    });
+
+});
+
+
 
 
 
