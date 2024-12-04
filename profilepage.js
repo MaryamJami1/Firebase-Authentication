@@ -52,24 +52,41 @@ const unsub = onSnapshot(u, async () => {
 
 
 
-
-
-
 const auth = getAuth();
 postBtn.addEventListener("click", async () => {
     const user = auth.currentUser;
     console.log(user);
 
     if (user) {
-        /////get uid
+        ///// Get UID
         const uid = user.uid;
         console.log(uid);
 
-        ////// add data with random id
+        // Get the post text and selected category
+        const postContent = postText.value.trim();
+        const selectedCategory = document.getElementById("categorySelect").value;
+
+        if (!postContent) {
+            Swal.fire({
+                icon: "warning",
+                text: "Please write something before posting"
+            });
+            return;
+        }
+
+        if (!selectedCategory) {
+            Swal.fire({
+                icon: "warning",
+                text: "Please select a category for your post!"
+            });
+            return;
+        }
+
+        ////// Add data with random ID
         try {
             const docRef = await addDoc(collection(db, "posts"), {
-                h1:title.value,
-                post: postText.value,
+                post: postContent,
+                category: selectedCategory,
                 id: uid,
                 time: serverTimestamp(),
             });
@@ -78,13 +95,14 @@ postBtn.addEventListener("click", async () => {
             console.error("Error adding document: ", e);
         }
     } else {
-        console.log("no user");
-
+        console.log("No user logged in");
     }
-    getDiv.innerHTML = `<p>${postText.value}</p>`;
-    postText.value = " "
 
+    // Update the UI
+    getDiv.innerHTML = `<p>${postText.value}</p>`;
+    postText.value = "";
 });
+
 
 
 
@@ -114,115 +132,3 @@ getPost.addEventListener("click", async () => {
 
 
 });
-
-
-let cloudName = "dk1awivy2"
-let unsignedUploadPreset = "t5mrntvv"
-
-// cover photo
-
-let  coverBtn = document.getElementById("coverBtn");
-let coverInput = document.getElementById("coverInput");
-let coverDiv = document.getElementById("coverDiv")
-
-
-coverBtn.addEventListener("click", () => {
-    fileInput.click()
-    // coverDiv.innerHTML=" "
-
-})
-
-
-
-coverInput.addEventListener("change", async () => {
-    let file = coverInput.files[0]
-    
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", unsignedUploadPreset);
-
-    try {
-        const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload/`, {
-            method: "POST",
-            body: formData,
-        });
-    
-        const data = await response.json();
-        let src = data.secure_url;
-        console.log("Uploaded file URL:", src);
-    
-        // Transform the URL
-        // let transformedUrl = src.replace(
-        //     "upload/",
-        //     "upload/h_200,w_150/r_max/"
-        // );
-    
-        // console.log("Transformed URL:", transformedUrl);
-    
-        // Create and append the image
-        let img = new Image();
-        img.src = src;
-        coverDiv.appendChild(img);
-    } catch (error) {
-        console.error("Error during upload or transformation:", error);
-    }
-    
-}
-)
-
-
-
-
-
-
-// profile photo
-
-let pic = document.getElementById("uploadButton")
-let fileInput = document.getElementById("fileInput")
-let profileDiv = document.getElementById("profileDiv")
-
-
-
-pic.addEventListener("click", () => {
-    fileInput.click()
-    profileDiv.innerHTML=" "
-
-})
-
-fileInput.addEventListener("change", async () => {
-    let file = fileInput.files[0]
-    
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", unsignedUploadPreset);
-
-    try {
-        const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload/`, {
-            method: "POST",
-            body: formData,
-        });
-    
-        const data = await response.json();
-        let src = data.secure_url;
-        console.log("Uploaded file URL:", src);
-    
-        // Transform the URL
-        let transformedUrl = src.replace(
-            "upload/",
-            "upload/h_200,w_150/r_max/"
-        );
-    
-        console.log("Transformed URL:", transformedUrl);
-    
-        // Create and append the image
-        let img = new Image();
-        img.src = transformedUrl;
-        profileDiv.appendChild(img);
-    } catch (error) {
-        console.error("Error during upload or transformation:", error);
-    }
-    
-}
-)
